@@ -40,7 +40,8 @@ const DocumentPage = () => {
         return null
       }
     },
-    enabled: !!token
+    enabled: !!token,
+    refetchOnWindowFocus: false
   })
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {

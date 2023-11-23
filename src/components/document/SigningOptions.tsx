@@ -14,6 +14,8 @@ import { ReactSketchCanvas, ReactSketchCanvasRef } from 'react-sketch-canvas';
 const SigningOptions = ({data, refetch}:{data:DocumentObject, refetch:()=>void}) => {
     const [is_open, setis_open] = useState(false);
 
+    if(!data){return;}
+
     const EmailOption = () => {
         const [firstname, setfirstname] = useState('');
         const [lastname, setlastname] = useState('');
@@ -63,7 +65,7 @@ const SigningOptions = ({data, refetch}:{data:DocumentObject, refetch:()=>void})
         function isComplete() {
             let disable = true;
 
-            if(data.clientemail.length>1 && code.length>1 && lastname.length>2 && company.length>2){ disable = false }
+            if(data&&data.clientemail.length>1 && code.length>1 && lastname.length>2 && company.length>2){ disable = false }
 
             return disable
         }
@@ -178,7 +180,7 @@ const SigningOptions = ({data, refetch}:{data:DocumentObject, refetch:()=>void})
 
         function isComplete() {
             let disable = true;
-            if(data.clientemail.length>1 && code.length>1 && lastname.length>2 && company.length>2&&signature_base.length>4000){ disable = false }
+            if(data&&data.clientemail.length>1 && code.length>1 && lastname.length>2 && company.length>2&&signature_base.length>4000){ disable = false }
             return disable
         }
 
@@ -296,16 +298,16 @@ const SigningOptions = ({data, refetch}:{data:DocumentObject, refetch:()=>void})
 
         <button disabled={data.status === 2} onClick={()=>{setis_open(true)}} className={`${!is_open ? 'h-12 px-6' : 'w-0 h-0 overflow-hidden'} bg-orange-600 active:scale-95 active:bg-orange-700 text-white rounded-full font-medium flex gap-2 items-center disabled:bg-neutral-500`}>
             {data.status !== 2 ? 'Ondertekenen'
-            : <><Check className='w-4' strokeWidth={2}/>Ondertekent</>
+            : <><Check className='w-4' strokeWidth={2}/>Ondertekend</>
             }
         </button>
 
         <DrawOption />
 
-        <button className={`${is_open ? 'scale-100 w-20 min-w-[80px] h-20 min-h-[80px]' : 'scale-0 w-0 h-0'} rounded-md bg-neutral-50 text-neutral-400 flex flex-col items-center justify-center gap-1 hover:bg-orange-50 hover:text-orange-500 hover:border hover:border-orange-500 duration-200`}>
+        {/* <button disabled className={`opacity-50 cursor-not-allowed ${is_open ? 'scale-100 w-20 min-w-[80px] h-20 min-h-[80px]' : 'scale-0 w-0 h-0'} rounded-md bg-neutral-50 text-neutral-400 flex flex-col items-center justify-center gap-1 hover:bg-orange-50 hover:text-orange-500 hover:border hover:border-orange-500 duration-200`}>
             <MonitorSmartphone className='w-5'/>
-            <p className={`${josefin.className} font-medium text-sm`}>ID Viewer</p>
-        </button>
+            <p className={`${josefin.className} font-medium text-sm`}>Soon</p>
+        </button> */}
     </div>
   )
 }
